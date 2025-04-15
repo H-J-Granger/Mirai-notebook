@@ -1,0 +1,741 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mirai}[Mirai's own little package]
+
+% TODO: 添加 RequirePackage 区
+
+% 提供 option
+
+\newcounter{flagGlsLanguage}  % 术语表语言，0=英语，1=汉语
+\DeclareOption{glsEnglish}{\setcounter{flagGlsLanguage}{0}}  % 术语表使用英语
+\DeclareOption{glsChinese}{\setcounter{flagGlsLanguage}{1}}  % 术语表使用汉语
+\ExecuteOptions{glsChinese}  % 默认使用汉语
+
+\newcounter{flagThmLanguage}  % 定理环境语言，0=英语，1=汉语
+\DeclareOption{thmEnglish}{\setcounter{flagThmLanguage}{0}}  % 术语表使用英语
+\DeclareOption{thmChinese}{\setcounter{flagThmLanguage}{1}}  % 术语表使用汉语
+\ExecuteOptions{thmChinese}  % 默认使用汉语
+
+\ProcessOptions\relax  % 结束 option 区
+
+% 定理环境
+
+\usepackage{amsthm}
+
+\if\theflagThmLanguage1
+\theoremstyle{definition} 
+\newtheorem{theorem}{定理}[section]
+\newtheorem*{theorem*}{定理}
+\newtheorem{axiom}[theorem]{公理}
+\newtheorem*{axiom*}{公理}
+\newtheorem{proposition}[theorem]{命题}
+\newtheorem*{proposition*}{命题}
+\newtheorem{definition}[theorem]{定义}
+\newtheorem*{definition*}{定义}
+\newtheorem{corollary}[theorem]{推论}
+\newtheorem*{corollary*}{推论}
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem*{lemma*}{引理}
+\newtheorem{example}[theorem]{例}
+\newtheorem*{example*}{例}
+\newtheorem{remark}[theorem]{注}
+\newtheorem*{remark*}{注}
+\newtheorem{problem}{问题}[section]
+\newtheorem*{problem*}{问题}
+\newtheorem{conjecture}[theorem]{猜想}
+\newtheorem*{conjecture*}{猜想}
+
+\newtheorem{exercise}{习题}[section]
+\newtheorem*{exercise*}{习题}
+
+\theoremstyle{remark}
+\newenvironment{solution}{\begin{proof}[\it 解.]}{\end{proof}}
+\else
+\theoremstyle{definition} 
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem*{axiom*}{Axiom}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{definition*}{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem*{corollary*}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{example*}{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem*{remark*}{Remark}
+\newtheorem{problem}{Problem}[section]
+\newtheorem*{problem*}{Problem}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem*{conjecture*}{Conjecture}
+
+\newtheorem{exercise}{Exercise}[section]
+\newtheorem*{exercise*}{Exercise}
+
+\theoremstyle{remark}
+\newenvironment{solution}{\begin{proof}[\it Solution.]}{\end{proof}}
+\fi
+
+% 函数
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\cis}{\operatorname{cis}}
+\newcommand{\xor}{\operatorname{xor}}
+\newcommand{\Arg}{\operatorname{Arg}}  % 辐角
+\newcommand{\dist}{\operatorname{dist}}  % 辐角
+
+% == (双曲/反)三角函数
+\newcommand{\asin}{\operatorname{asin}}
+\newcommand{\acos}{\operatorname{acos}}
+\newcommand{\atan}{\operatorname{atan}}
+\newcommand{\sech}{\operatorname{sech}}
+\newcommand{\csch}{\operatorname{csch}}
+\newcommand{\arsinh}{\operatorname{arsinh}}
+\newcommand{\arcosh}{\operatorname{arcosh}}
+\newcommand{\artanh}{\operatorname{artanh}}
+\newcommand{\arcoth}{\operatorname{arcoth}}
+\newcommand{\arsech}{\operatorname{arsech}}
+\newcommand{\arcsch}{\operatorname{arcsch}}
+
+% 记号
+\newcommand{\e}{\mathrm e}
+\newcommand{\ii}{\mathrm i}  % \i 被占用
+\newcommand{\T}{\mathrm T}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\E}{\mathbb E}
+\newcommand{\LHS}{\mathrm{LHS}}
+\newcommand{\RHS}{\mathrm{RHS}}
+
+% 算子
+\newcommand{\di}{\,\mathrm{d}}  % 积分用，前面有分隔
+\newcommand{\dd}{\mathrm{d}}  % 普通微分用
+\newcommand{\ddx}[1]{\frac{\mathrm{d}#1}{\mathrm{d}x}}
+\newcommand{\ddt}[1]{\frac{\mathrm{d}#1}{\mathrm{d}t}}
+\newcommand{\limn}{\lim\limits_{n\to\infty}}
+\newcommand{\limx}[1]{\lim\limits_{x\to{#1}}}
+\newcommand{\limxy}[2]{\lim\limits_{\begin{subarray}{c}x\to{#1}\\y\to{#2}\end{subarray}}}
+\newcommand{\sumn}[1][1]{\sum\limits_{n=#1}^{\infty}}
+\newcommand{\sumk}[1][n]{\sum\limits_{k=1}^{#1}}
+\newcommand{\sumi}[1][n]{\sum\limits_{i=1}^{#1}}
+\newcommand{\prodk}[1][n]{\prod\limits_{k=1}^{#1}}
+\newcommand{\intinf}[1]{\int_{#1}^{+\infty}}
+\newcommand{\suminf}[1]{\sum_{#1=1}^{\infty}}
+% 多行条件的算子
+\newcommand{\lims}[2][c]{\lim\limits_{\begin{subarray}{#1}#2\end{subarray}}}
+\newcommand{\sums}[3][c]{\sum\limits_{\begin{subarray}{#1}#2\end{subarray}}^{#3}}
+\newcommand{\prods}[3][c]{\prod\limits_{\begin{subarray}{#1}#2\end{subarray}}^{#3}}
+\newcommand{\mins}[2][c]{\min\limits_{\begin{subarray}{#1}#2\end{subarray}}}
+\newcommand{\maxs}[2][c]{\max\limits_{\begin{subarray}{#1}#2\end{subarray}}}
+% 多变量微积分算子
+\newcommand{\curl}{\operatorname{curl}}
+\newcommand{\Div}{\operatorname{div}}
+\newcommand{\grad}{\operatorname{grad}}
+\newcommand{\ppt}[1]{\frac{\partial #1}{\partial t}}
+\newcommand{\ppx}[1]{\frac{\partial #1}{\partial x}}
+
+% {cases} 环境语句
+\newcommand{\iif}{\text{if }}  % \if 被占用
+\ltx@ifpackageloaded{algpseudocodex}{}{\newcommand{\If}{\text{if }}}
+\newcommand{\otherwise}{\text{otherwise}}
+\newcommand{\otw}{\otherwise}
+
+% 括号
+\newcommand{\lflr}{\left\lfloor}
+\newcommand{\rflr}{\right\rfloor}
+\newcommand{\lcel}{\left\lceil}
+\newcommand{\rcel}{\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\tfloor}[1]{\lfloor{#1}\rfloor}
+\newcommand{\tceil}[1]{\lceil{#1}\rceil}
+
+% 希腊字母
+\newcommand{\omicron}{o}
+\newcommand{\Alpha}{A}
+\newcommand{\Beta}{B}
+\newcommand{\Epsilon}{E}
+\newcommand{\Zeta}{Z}
+\newcommand{\Eta}{H}
+\newcommand{\Iota}{I}
+\newcommand{\Kappa}{K}
+\newcommand{\Mu}{M}
+\newcommand{\Nu}{N}
+\newcommand{\Omicron}{O}
+\newcommand{\Rho}{P}
+\newcommand{\Tau}{T}
+\newcommand{\Chi}{X}
+\newcommand{\varAlpha}{A}
+\newcommand{\varBeta}{B}
+\newcommand{\varEpsilon}{E}
+\newcommand{\varZeta}{Z}
+\newcommand{\varEta}{H}
+\newcommand{\varIota}{I}
+\newcommand{\varKappa}{K}
+\newcommand{\varMu}{M}
+\newcommand{\varNu}{N}
+\newcommand{\varOmicron}{O}
+\newcommand{\varRho}{P}
+\newcommand{\varTau}{T}
+\newcommand{\varChi}{X}
+
+% 物理记号
+% \newcommand{\unit}[1]{\ \text{#1}}
+
+% 代数记号
+% == 抽象代数
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\SO}{\operatorname{SO}}
+\newcommand{\homomrph}{\xrightarrow{\sim}}  % 群同态
+\newcommand{\epimrph}{\twoheadrightarrow}  % 满同态
+\newcommand{\monomrph}{\hookrightarrow}  % 单同态
+\newcommand{\isomrph}{\cong}  % 群同构
+\newcommand{\subgroupeq}{\leqslant} 
+\newcommand{\subgroup}{<}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\ideal}{\triangleleft}
+\newcommand{\pmat}[4]{\begin{pmatrix}{#1}&{#2}\\{#3}&{#4}\end{pmatrix}}
+\newcommand{\mat}[4]{\begin{matrix}{#1}&{#2}\\{#3}&{#4}\end{matrix}}
+\newcommand{\normalsubgroup}{\triangleleft}
+\newcommand{\normsubgroup}{\normalsubgroup}
+\newcommand{\Char}{\operatorname{char}}  % 域的特征值
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\id}{\operatorname{id}}  % 恒等映射
+\newcommand{\Span}{\operatorname{span}}  % 向量组张成的空间
+
+% == 线性代数
+\newcommand{\trs}{\mathrm{T}}  % 矩阵转置
+\newcommand{\hms}{\mathrm{H}}  % 共轭转置
+\newcommand{\tr}{\operatorname{tr}}  % 矩阵的迹
+\newcommand{\diag}{\operatorname{diag}}  % 对角矩阵
+\newcommand{\rank}{\operatorname{rank}}  % 矩阵的秩
+
+% == 其他代数
+\newcommand{\lc}{\operatorname{\sf lc}}  % 首项系数
+
+% 几何记号
+\newcommand{\para}{\,/\!/\,}  % 平行符号 //
+
+% 数论记号
+\newcommand{\mmid}{\;\|\;}  % 恰好整除 p^2 || n
+\newcommand{\lcm}{\operatorname{lcm}}  % 最小公倍数
+
+% 分析记号
+\newcommand{\setmid}{\;\middle|\;}  % 集合构造分隔符 {x\in S | x>0}
+\newcommand{\card}{\operatorname{card}}  % 集合的势
+\newcommand{\limsupn}{\varlimsup\limits_{n\to\infty}}
+\newcommand{\liminfn}{\varliminf\limits_{n\to\infty}}
+\newcommand{\limsupx}[1]{\varlimsup\limits_{x\to{#1}}}
+\newcommand{\liminfx}[1]{\varliminf\limits_{x\to{#1}}}
+\newcommand{\supp}{\operatorname{supp}}  % 支撑集
+
+% 组合记号
+\newcommand{\mex}{\operatorname{mex}}  % 最小的不在集合内的正整数
+\newcommand{\SG}{\operatorname{SG}}  % Sprague–Grundy 值
+
+% 概率记号
+\newcommand{\prob}{\operatorname{\mathbb P}}
+\newcommand{\expect}{\operatorname{\mathbb E}}
+\newcommand{\Var}{\operatorname{Var}}  % 方差
+
+% TCS 记号
+\newcommand{\poly}{\operatorname{poly}}
+\newcommand{\polylog}{\operatorname{polylog}}
+
+% 术语表
+
+\newcommand{\miraiGlsNewEntryAtFirstUse}[2]{%
+  {\newglossaryentry{#1}{
+    name={#1},
+    description={%
+      \ifx&#2&%
+      \else%
+        \!(#2) %
+      \fi%
+    }%
+  }}%
+}
+
+\newcommand{\glsplain}[2]{%
+  \miraiGlsNewEntryAtFirstUse{#1}{#2}%
+  \gls{#1}%
+}
+\newcommand{\glsbf}[2]{%
+  \miraiGlsNewEntryAtFirstUse{#1}{#2}%
+  \textbf{\gls{#1}}{}%
+}
+\newcommand{\glsnote}[2]{%
+  \miraiGlsNewEntryAtFirstUse{#1}{#2}%
+  \gls{#1} (#2)%
+}
+\newcommand{\glsnotebf}[2]{%
+  \miraiGlsNewEntryAtFirstUse{#1}{#2}%
+  \textbf{\gls{#1}}{} (#2)%
+}
+
+% 排版
+\newcommand{\cds}{\cdots{}}  % 不加额外空格的 cdots，只应在数学模式下逗号间使用
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+\newcommand{\tbf}[1]{\textbf{#1}{}}  % 不吞空格的粗体
+\newcommand{\emptyline}{\hspace*{\fill}}  % 空行
+\newcommand{\brk}{\linebreak[2]}  % 调高在这里的断行优先级
+\newcommand\nnfootnote[1]{  % 没有文内数字的脚标
+  % From https://tex.stackexchange.com/questions/415625/avoiding-hyperref-warning-ignoring-empty-anchor
+  \begin{NoHyper}
+  \renewcommand\thefootnote{}\footnote{#1}
+  \addtocounter{footnote}{-1}
+  \end{NoHyper}
+}
+\renewcommand{\labelenumi}{(\alph{enumi})}  % Enumerator & Iterator
+\renewcommand{\labelenumii}{(\roman{enumii})}
+\renewcommand{\labelitemii}{$\circ$}
+\newcommand{\dst}{\displaystyle}
+\newcommand{\footnotetextpre}[2][1]{\footnotetext[\the\numexpr\thefootnote-#1\relax]{#2}}  % 对前 #1 个 \footnotemark 添加 text
+
+\ifdefined\setCJKmainfont
+  \setCJKmainfont{FandolSong-Regular}[Extension=.otf,BoldFont=FandolHei-Regular,ItalicFont=FandolKai-Regular]
+\fi
+
+%  ======================= 带标记的积分算子 ==============
+% from https://tex.stackexchange.com/a/178651/363573
+% Usage: 平均积分：\mint{-} 环路积分：\mint{\circ} 
+\newcommand*{\mint}[1]{%
+  % #1: overlay symbol
+  \mint@l{#1}{}%
+}
+\newcommand*{\mint@l}[2]{%
+  % #1: overlay symbol
+  % #2: limits
+  \@ifnextchar\limits{%
+    \mint@l{#1}%
+  }{%
+    \@ifnextchar\nolimits{%
+      \mint@l{#1}%
+    }{%
+      \@ifnextchar\displaylimits{%
+        \mint@l{#1}%
+      }{%
+        \mint@s{#2}{#1}%
+      }%
+    }%
+  }%
+}
+\newcommand*{\mint@s}[2]{%
+  % #1: limits
+  % #2: overlay symbol
+  \@ifnextchar_{%
+    \mint@sub{#1}{#2}%
+  }{%
+    \@ifnextchar^{%
+      \mint@sup{#1}{#2}%
+    }{%
+      \mint@{#1}{#2}{}{}%
+    }%
+  }%
+}
+\def\mint@sub#1#2_#3{%
+  \@ifnextchar^{%
+    \mint@sub@sup{#1}{#2}{#3}%
+  }{%
+    \mint@{#1}{#2}{#3}{}%
+  }%
+}
+\def\mint@sup#1#2^#3{%
+  \@ifnextchar_{%
+    \mint@sup@sub{#1}{#2}{#3}%
+  }{%
+    \mint@{#1}{#2}{}{#3}%
+  }%
+}
+\def\mint@sub@sup#1#2#3^#4{%
+  \mint@{#1}{#2}{#3}{#4}%
+}
+\def\mint@sup@sub#1#2#3_#4{%
+  \mint@{#1}{#2}{#4}{#3}%
+}
+\newcommand*{\mint@}[4]{%
+  % #1: \limits, \nolimits, \displaylimits
+  % #2: overlay symbol: -, =, ...
+  % #3: subscript
+  % #4: superscript
+  \mathop{}%
+  \mkern-\thinmuskip
+  \mathchoice{%
+    \mint@@{#1}{#2}{#3}{#4}%
+        \displaystyle\textstyle\scriptstyle
+  }{%
+    \mint@@{#1}{#2}{#3}{#4}%
+        \textstyle\scriptstyle\scriptstyle
+  }{%
+    \mint@@{#1}{#2}{#3}{#4}%
+        \scriptstyle\scriptscriptstyle\scriptscriptstyle
+  }{%
+    \mint@@{#1}{#2}{#3}{#4}%
+        \scriptscriptstyle\scriptscriptstyle\scriptscriptstyle
+  }%
+  \mkern-\thinmuskip
+  \int#1%
+  \ifx\\#3\\\else_{#3}\fi
+  \ifx\\#4\\\else^{#4}\fi  
+}
+\newcommand*{\mint@@}[7]{%
+  % #1: limits
+  % #2: overlay symbol
+  % #3: subscript
+  % #4: superscript
+  % #5: math style
+  % #6: math style for overlay symbol
+  % #7: math style for subscript/superscript
+  \begingroup
+    \sbox0{$#5\int\m@th$}%
+    \sbox2{$#5\int_{}\m@th$}%
+    \dimen2=\wd0 %
+    % => \dimen2 = width of \int
+    \let\mint@limits=#1\relax
+    \ifx\mint@limits\relax
+      \sbox4{$#5\int_{\kern1sp}^{\kern1sp}\m@th$}%
+      \ifdim\wd4>\wd2 %
+        \let\mint@limits=\nolimits
+      \else
+        \let\mint@limits=\limits
+      \fi
+    \fi
+    \ifx\mint@limits\displaylimits
+      \ifx#5\displaystyle
+        \let\mint@limits=\limits
+      \fi
+    \fi
+    \ifx\mint@limits\limits
+      \sbox0{$#7#3\m@th$}%
+      \sbox2{$#7#4\m@th$}%
+      \ifdim\wd0>\dimen2 %
+        \dimen2=\wd0 %
+      \fi
+      \ifdim\wd2>\dimen2 %
+        \dimen2=\wd2 %
+      \fi
+    \fi
+    \rlap{%
+      $#5%
+        \vcenter{%
+          \hbox to\dimen2{%
+            \hss
+            $#6{#2}\m@th$%
+            \hss
+          }%
+        }%
+      $%
+    }%
+  \endgroup
+}
+
+%  ======== 含有 Bourbaki Dangerous Bend (Kunth's version) 的定理环境 =======
+% from https://tex.stackexchange.com/a/705472
+
+\usepackage{manfnt}
+\newlength{\dangerwidth} % width of \dbend
+\settowidth{\dangerwidth}{\dbend}
+\addtolength{\dangerwidth}{1em} % add any extra space between \dbend and text
+
+\NewDocumentEnvironment{dremark}{o}{%
+  \par\addvspace{\topsep}
+  \clubpenalties=3 10000 5000 0 
+  \AddToHookNext{para/end}{\clubpenalties=0 }%
+  \AddToHookNext{para/after}{\ifnum\prevgraf=1 \nopagebreak\hbox{}\fi}%
+  \hangindent=\dangerwidth \hangafter=-2 
+  \refstepcounter{theorem}%
+  \everypar\expandafter{%
+    {\setbox0=\lastbox}%
+    \makebox[0pt]{\hspace*{-\hangindent}\dbend\hfill}%
+    \textbf{注 \theHtheorem}%
+    \IfValueT{#1}{ (#1)}%
+    \textbf{.}\hspace*{5pt plus 1pt minus 1pt}%
+    \everypar{}%
+  }%
+  \ignorespaces
+}{
+  \par
+  \addvspace{\topsep}%
+}
+\NewDocumentEnvironment{dtheorem}{o}{%
+  \par\addvspace{\topsep}
+  \clubpenalties=3 10000 5000 0 
+  \AddToHookNext{para/end}{\clubpenalties=0 }%
+  \AddToHookNext{para/after}{\ifnum\prevgraf=1 \nopagebreak\hbox{}\fi}%
+  \hangindent=\dangerwidth \hangafter=-2 
+  \refstepcounter{theorem}%
+  \everypar\expandafter{%
+    {\setbox0=\lastbox}%
+    \makebox[0pt]{\hspace*{-\hangindent}\dbend\hfill}%
+    \textbf{定理 \theHtheorem}%
+    \IfValueT{#1}{ (#1)}%
+    \textbf{.}\hspace*{5pt plus 1pt minus 1pt}%
+    \everypar{}%
+  }%
+  \ignorespaces
+}{
+  \par
+  \addvspace{\topsep}%
+}
+\NewDocumentEnvironment{dlemma}{o}{%
+  \par\addvspace{\topsep}
+  \clubpenalties=3 10000 5000 0 
+  \AddToHookNext{para/end}{\clubpenalties=0 }%
+  \AddToHookNext{para/after}{\ifnum\prevgraf=1 \nopagebreak\hbox{}\fi}%
+  \hangindent=\dangerwidth \hangafter=-2 
+  \refstepcounter{theorem}%
+  \everypar\expandafter{%
+    {\setbox0=\lastbox}%
+    \makebox[0pt]{\hspace*{-\hangindent}\dbend\hfill}%
+    \textbf{引理 \theHtheorem}%
+    \IfValueT{#1}{ (#1)}%
+    \textbf{.}\hspace*{5pt plus 1pt minus 1pt}%
+    \everypar{}%
+  }%
+  \ignorespaces
+}{
+  \par
+  \addvspace{\topsep}%
+}
+\NewDocumentEnvironment{daxiom}{o}{%
+  \par\addvspace{\topsep}
+  \clubpenalties=3 10000 5000 0 
+  \AddToHookNext{para/end}{\clubpenalties=0 }%
+  \AddToHookNext{para/after}{\ifnum\prevgraf=1 \nopagebreak\hbox{}\fi}%
+  \hangindent=\dangerwidth \hangafter=-2 
+  \refstepcounter{theorem}%
+  \everypar\expandafter{%
+    {\setbox0=\lastbox}%
+    \makebox[0pt]{\hspace*{-\hangindent}\dbend\hfill}%
+    \textbf{公理 \theHtheorem}%
+    \IfValueT{#1}{ (#1)}%
+    \textbf{.}\hspace*{5pt plus 1pt minus 1pt}%
+    \everypar{}%
+  }%
+  \ignorespaces
+}{
+  \par
+  \addvspace{\topsep}%
+}
+\NewDocumentEnvironment{dproposition}{o}{%
+  \par\addvspace{\topsep}
+  \clubpenalties=3 10000 5000 0 
+  \AddToHookNext{para/end}{\clubpenalties=0 }%
+  \AddToHookNext{para/after}{\ifnum\prevgraf=1 \nopagebreak\hbox{}\fi}%
+  \hangindent=\dangerwidth \hangafter=-2 
+  \refstepcounter{theorem}%
+  \everypar\expandafter{%
+    {\setbox0=\lastbox}%
+    \makebox[0pt]{\hspace*{-\hangindent}\dbend\hfill}%
+    \textbf{命题 \theHtheorem}%
+    \IfValueT{#1}{ (#1)}%
+    \textbf{.}\hspace*{5pt plus 1pt minus 1pt}%
+    \everypar{}%
+  }%
+  \ignorespaces
+}{
+  \par
+  \addvspace{\topsep}%
+}
+\NewDocumentEnvironment{ddefinition}{o}{%
+  \par\addvspace{\topsep}
+  \clubpenalties=3 10000 5000 0 
+  \AddToHookNext{para/end}{\clubpenalties=0 }%
+  \AddToHookNext{para/after}{\ifnum\prevgraf=1 \nopagebreak\hbox{}\fi}%
+  \hangindent=\dangerwidth \hangafter=-2 
+  \refstepcounter{theorem}%
+  \everypar\expandafter{%
+    {\setbox0=\lastbox}%
+    \makebox[0pt]{\hspace*{-\hangindent}\dbend\hfill}%
+    \textbf{定义 \theHtheorem}%
+    \IfValueT{#1}{ (#1)}%
+    \textbf{.}\hspace*{5pt plus 1pt minus 1pt}%
+    \everypar{}%
+  }%
+  \ignorespaces
+}{
+  \par
+  \addvspace{\topsep}%
+}
+\NewDocumentEnvironment{dexample}{o}{%
+  \par\addvspace{\topsep}
+  \clubpenalties=3 10000 5000 0 
+  \AddToHookNext{para/end}{\clubpenalties=0 }%
+  \AddToHookNext{para/after}{\ifnum\prevgraf=1 \nopagebreak\hbox{}\fi}%
+  \hangindent=\dangerwidth \hangafter=-2 
+  \refstepcounter{theorem}%
+  \everypar\expandafter{%
+    {\setbox0=\lastbox}%
+    \makebox[0pt]{\hspace*{-\hangindent}\dbend\hfill}%
+    \textbf{例 \theHtheorem}%
+    \IfValueT{#1}{ (#1)}%
+    \textbf{.}\hspace*{5pt plus 1pt minus 1pt}%
+    \everypar{}%
+  }%
+  \ignorespaces
+}{
+  \par
+  \addvspace{\topsep}%
+}
+\NewDocumentEnvironment{dcorollary}{o}{%
+  \par\addvspace{\topsep}
+  \clubpenalties=3 10000 5000 0 
+  \AddToHookNext{para/end}{\clubpenalties=0 }%
+  \AddToHookNext{para/after}{\ifnum\prevgraf=1 \nopagebreak\hbox{}\fi}%
+  \hangindent=\dangerwidth \hangafter=-2 
+  \refstepcounter{theorem}%
+  \everypar\expandafter{%
+    {\setbox0=\lastbox}%
+    \makebox[0pt]{\hspace*{-\hangindent}\dbend\hfill}%
+    \textbf{推论 \theHtheorem}%
+    \IfValueT{#1}{ (#1)}%
+    \textbf{.}\hspace*{5pt plus 1pt minus 1pt}%
+    \everypar{}%
+  }%
+  \ignorespaces
+}{
+  \par
+  \addvspace{\topsep}%
+}
+
+
+\NewDocumentEnvironment{dremark*}{o}{%
+  \par\addvspace{\topsep}
+  \clubpenalties=3 10000 5000 0 
+  \AddToHookNext{para/end}{\clubpenalties=0 }%
+  \AddToHookNext{para/after}{\ifnum\prevgraf=1 \nopagebreak\hbox{}\fi}%
+  \hangindent=\dangerwidth \hangafter=-2 
+  \everypar\expandafter{%
+    {\setbox0=\lastbox}%
+    \makebox[0pt]{\hspace*{-\hangindent}\dbend\hfill}%
+    \textbf{注}%
+    \IfValueT{#1}{ (#1)}%
+    \textbf{.}\hspace*{5pt plus 1pt minus 1pt}%
+    \everypar{}%
+  }%
+  \ignorespaces
+}{
+  \par
+  \addvspace{\topsep}%
+}
+\NewDocumentEnvironment{dtheorem*}{o}{%
+  \par\addvspace{\topsep}
+  \clubpenalties=3 10000 5000 0 
+  \AddToHookNext{para/end}{\clubpenalties=0 }%
+  \AddToHookNext{para/after}{\ifnum\prevgraf=1 \nopagebreak\hbox{}\fi}%
+  \hangindent=\dangerwidth \hangafter=-2 
+  \everypar\expandafter{%
+    {\setbox0=\lastbox}%
+    \makebox[0pt]{\hspace*{-\hangindent}\dbend\hfill}%
+    \textbf{定理}%
+    \IfValueT{#1}{ (#1)}%
+    \textbf{.}\hspace*{5pt plus 1pt minus 1pt}%
+    \everypar{}%
+  }%
+  \ignorespaces
+}{
+  \par
+  \addvspace{\topsep}%
+}
+\NewDocumentEnvironment{dexample*}{o}{%
+  \par\addvspace{\topsep}
+  \clubpenalties=3 10000 5000 0 
+  \AddToHookNext{para/end}{\clubpenalties=0 }%
+  \AddToHookNext{para/after}{\ifnum\prevgraf=1 \nopagebreak\hbox{}\fi}%
+  \hangindent=\dangerwidth \hangafter=-2 
+  \everypar\expandafter{%
+    {\setbox0=\lastbox}%
+    \makebox[0pt]{\hspace*{-\hangindent}\dbend\hfill}%
+    \textbf{例}%
+    \IfValueT{#1}{ (#1)}%
+    \textbf{.}\hspace*{5pt plus 1pt minus 1pt}%
+    \everypar{}%
+  }%
+  \ignorespaces
+}{
+  \par
+  \addvspace{\topsep}%
+}
+\NewDocumentEnvironment{dcorollary*}{o}{%
+  \par\addvspace{\topsep}
+  \clubpenalties=3 10000 5000 0 
+  \AddToHookNext{para/end}{\clubpenalties=0 }%
+  \AddToHookNext{para/after}{\ifnum\prevgraf=1 \nopagebreak\hbox{}\fi}%
+  \hangindent=\dangerwidth \hangafter=-2 
+  \everypar\expandafter{%
+    {\setbox0=\lastbox}%
+    \makebox[0pt]{\hspace*{-\hangindent}\dbend\hfill}%
+    \textbf{推论}%
+    \IfValueT{#1}{ (#1)}%
+    \textbf{.}\hspace*{5pt plus 1pt minus 1pt}%
+    \everypar{}%
+  }%
+  \ignorespaces
+}{
+  \par
+  \addvspace{\topsep}%
+}
+\NewDocumentEnvironment{ddefinition*}{o}{%
+  \par\addvspace{\topsep}
+  \clubpenalties=3 10000 5000 0 
+  \AddToHookNext{para/end}{\clubpenalties=0 }%
+  \AddToHookNext{para/after}{\ifnum\prevgraf=1 \nopagebreak\hbox{}\fi}%
+  \hangindent=\dangerwidth \hangafter=-2 
+  \everypar\expandafter{%
+    {\setbox0=\lastbox}%
+    \makebox[0pt]{\hspace*{-\hangindent}\dbend\hfill}%
+    \textbf{定义}%
+    \IfValueT{#1}{ (#1)}%
+    \textbf{.}\hspace*{5pt plus 1pt minus 1pt}%
+    \everypar{}%
+  }%
+  \ignorespaces
+}{
+  \par
+  \addvspace{\topsep}%
+}
+\NewDocumentEnvironment{daxiom*}{o}{%
+  \par\addvspace{\topsep}
+  \clubpenalties=3 10000 5000 0 
+  \AddToHookNext{para/end}{\clubpenalties=0 }%
+  \AddToHookNext{para/after}{\ifnum\prevgraf=1 \nopagebreak\hbox{}\fi}%
+  \hangindent=\dangerwidth \hangafter=-2 
+  \everypar\expandafter{%
+    {\setbox0=\lastbox}%
+    \makebox[0pt]{\hspace*{-\hangindent}\dbend\hfill}%
+    \textbf{公理}%
+    \IfValueT{#1}{ (#1)}%
+    \textbf{.}\hspace*{5pt plus 1pt minus 1pt}%
+    \everypar{}%
+  }%
+  \ignorespaces
+}{
+  \par
+  \addvspace{\topsep}%
+}
+\NewDocumentEnvironment{dlemma*}{o}{%
+  \par\addvspace{\topsep}
+  \clubpenalties=3 10000 5000 0 
+  \AddToHookNext{para/end}{\clubpenalties=0 }%
+  \AddToHookNext{para/after}{\ifnum\prevgraf=1 \nopagebreak\hbox{}\fi}%
+  \hangindent=\dangerwidth \hangafter=-2 
+  \everypar\expandafter{%
+    {\setbox0=\lastbox}%
+    \makebox[0pt]{\hspace*{-\hangindent}\dbend\hfill}%
+    \textbf{公理}%
+    \IfValueT{#1}{ (#1)}%
+    \textbf{.}\hspace*{5pt plus 1pt minus 1pt}%
+    \everypar{}%
+  }%
+  \ignorespaces
+}{
+  \par
+  \addvspace{\topsep}%
+}

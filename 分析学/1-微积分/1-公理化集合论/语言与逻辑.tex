@@ -1,0 +1,68 @@
+% !TEX root = ../main.tex
+\section{语言与逻辑}
+
+王新茂老师有名言：“学数学就是学说话”。本节我们来考察数学这门语言的最基础的部分——逻辑。
+
+本节主要参考自 \cite[chp. 1]{takeuti12}。  
+
+逻辑作为一门语言，自然有其最基本的词语（符号）。
+
+\index{bianliang@变量!ziyou@自由\~{}}
+\index{bianliang@变量!yueshu@约束\~{}}
+\index{fuhao@符号!weici@谓词\~{}}
+\index{fuhao@符号!luoji@逻辑\~{}}
+\index{fuhao@符号!fuzhu@辅助\~{}}
+\begin{definition}[逻辑的基本符号]\emptyline
+  本章我们表记 \textbf{自由变量}(free variable) 为 \(a_0,a_1,\cdots\)；我们表记 \textbf{约束变量}(bound variable) 为 \(x_0,x_1,\cdots\)。我们使用一个 \textbf{谓词符号}(predicate symbol) \(\in\)。我们还有一些 \textbf{逻辑符号}(logical symbol) \(\lnot,\land,\lor,\rightarrow,\leftrightarrow,\forall,\exists\) 和一些 \textbf{辅助符号}(auxiliary symbol) \((\), \()\), \([\), \(]\)。
+\end{definition}
+
+\index{bianliang@变量!yuan@元\~{}}
+\begin{remark}[元变量]
+  我们会用 \textbf{元变量}(metavariable) \(a,b,c,d\) 来表示某些自由变量 \(a_0,a_1,\cdots\)；用元变量 \(x,y,z\) 来表示某些约束变量 \(x_0,x_1,\cdots\)；用 \(\varphi,\psi,\eta\) 来表示某些良构公式（定义见下）。
+\end{remark}
+
+\index{lianggougongshi@良构公式}
+\index{lianggougongshi@良构公式!yuanzide@原子的\~{}}
+\begin{definition}[良构公式] \label{def:良构公式}
+  我们定义 \textbf{良构公式}(well-formed formula，简称公式) 如下：
+  \begin{enumerate}
+    \item 若 \(a,b\) 是自由变量，则 \([a\in b]\) 是一个良构公式。这样的公式被称为是 \textbf{原子的}(atomic)。
+    \item 若 \(\varphi,\psi\) 是良构公式，则 \(\lnot\varphi,[\varphi\lor\psi],[\varphi\land\psi],[\varphi\rightarrow\psi],[\varphi\leftrightarrow\psi]\) 都是良构公式。
+    \item 若 \(\varphi\) 是公式，则 \((\forall x)\varphi(x)\) 和 \((\exists x)\varphi(x)\) 都是公式，其中 \(\varphi(x)\) 表示用 \(\varphi\) 中某些自由变量 \(a\) 用 \(x\) 替换所得到的字符串。
+    \item 任意不能用 (a)--(c) 导出的字符串都不是良构公式。
+  \end{enumerate}
+\end{definition}
+
+\begin{remark}
+  上述定义中的符号较为繁琐。在不引起歧义的前提下，我们也会省略一些辅助记号。譬如，我们更倾向于写 \(a_0\in a_1\) 而不是 \([a_0\in a_1]\)；写 \(a_0\in a_0\rightarrow a_0\in a_1\) 而不是 \([[a_0\in a_0]\in [a_0\in a_1]]\)。
+\end{remark}
+
+接下来我们来给出逻辑的公理。
+
+\index{gongli@公理!luoji@逻辑\~{}}
+\begin{axiom}[逻辑公理, logical axiom]\emptyline \label{axiom:逻辑公理}
+  \begin{enumerate}
+    \item \(\varphi\to[\psi\to\varphi].\)（真命题被一切命题蕴含）
+    \item \(\Bigl[\varphi\to[\psi\to\eta]\Bigr]\to\Bigl[[\varphi\to\psi]\to[\varphi\to\eta]\Bigr].\) （命题真性的传递性）
+    \item \([\lnot \varphi\to\lnot \psi]\to[\psi\to\varphi].\)（命题等价于其逆否）
+    \item \((\forall x)[\varphi\to\psi(x)]\to[\varphi\to(\forall x)\psi(x)]\)，其中 \(\psi(x)\) 中替换掉的 \(\psi\) 中的所有自由变量 \(a\) 都不出现在 \(\varphi\) 中。（蕴含与任意的可交换性）
+    \item \((\forall x)\varphi(x)\to\varphi(a)\)，其中 \(a\) 可以取任意一个自由变量；\(\varphi(a)\) 表示将 \(\varphi(x)\) 中所有的 \(x\) 替换为 \(a\)。
+  \end{enumerate}
+\end{axiom}
+
+接下来我们介绍“逻辑推理”的全部规则。
+
+\index{tuiliguize@推理规则}
+\begin{axiom}[推理规则]\emptyline 
+  \begin{enumerate}
+    \item 我们从 \(\varphi\) 和 \(\varphi\to\psi\) 中推出 \(\psi\)。
+    \item 我们从 \(\varphi\) 中推出 \((\forall x)\varphi(x)\)。
+  \end{enumerate}
+\end{axiom}
+
+\index{dingli@定理}
+\index{tuidaofuhao@推导符号}
+\index{yuanyuju@元语句}
+\begin{definition}[定理]
+  我们称一个公式 \(\varphi\) 是一个 \textbf{定理}(theorem)，当且仅当其可以通过推理规则从逻辑公理中推出。我们用 \textbf{推导符号}(turnstile) \(\vdash\) 来标记一个公式是一个定理：具体而言，我们用 \textbf{元语句}(metastatement) \(\vdash\varphi\) 来表示 \(\varphi\) 是一个可以从逻辑公理和后文一些不是逻辑公理的公理推导出的公式。我们用 \(\vdashLA \varphi\) 来表示 \(\varphi\) 可以仅用逻辑公理推导出。我们用称两个公式 \(\varphi\) 和 \(\psi\) 是 \textbf{逻辑等价的}(logically equivalent)，当且仅当 \(\vdashLA \varphi\leftrightarrow\psi\)。
+\end{definition}

@@ -1,0 +1,20 @@
+# Configuration folder of Visual Studio Code
+.vscode/*
+
+# Output PDF files
+*.pdf
+
+# Latex stuffs
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.idx
+*.ind
+*.ilg
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.xdv

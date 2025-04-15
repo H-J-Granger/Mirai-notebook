@@ -1,0 +1,103 @@
+% !TEX root = ../main.tex
+\section{相等}
+
+接下来，我们来引入一个很重要的概念：相等。本节主要参考 \cite[chp. 2]{takeuti12}。
+
+\index{xiangdeng@相等}
+\begin{definition}[相等]
+  称 \(a\) 和 \(b\) \textbf{相等}(equality)，即
+  \begin{equation*}
+    (\forall x)[x\in a\leftrightarrow x\in b].
+  \end{equation*}
+\end{definition}
+
+\begin{proposition}[相等的性质]\emptyline \label{prop:相等的性质}
+  \begin{enumerate}
+    \item \(a=a\).
+    \item \(a=b\to b=a\).
+    \item \(a=b\land b=c\to a=c\).
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}\emptyline
+  \begin{enumerate}
+    \item \((\forall x)[x\in a\leftrightarrow x\in a]\).
+    \item \((\forall x)[x\in a\leftrightarrow x\in b]\rightarrow (\forall x)[x\in b\leftrightarrow x\in a]\).
+    \item \((\forall x)[x\in a\leftrightarrow x\in b]\land(\forall x)[x\in b\leftrightarrow x\in c]\to (\forall x)[x\in a\leftrightarrow x\in c]\).\qedhere
+  \end{enumerate}
+\end{proof}
+
+我们肯定会期待我们定义的“相等”满足如下性质：
+\begin{equation*}
+  a=b\rightarrow [\varphi(a)\leftrightarrow \varphi(b)].
+\end{equation*}
+
+接下来我们要给出一个更弱的命题作为公理，将上式作为其的一个推论。
+
+\begin{axiom}[外延公理] 相等的元素由同样的元素组成。 \label{axiom:外延公理}
+  \begin{equation*}
+    a=b\land a\in c\rightarrow b\in c.
+  \end{equation*}
+\end{axiom}
+
+\begin{lemma}
+  \(a=b\to[a\in c\leftrightarrow b\in c]\).
+\end{lemma}
+\begin{proof}
+  从公理 \ref{axiom:外延公理} 和命题 \ref{prop:相等的性质}b 立即得出。
+\end{proof}
+
+\begin{theorem}
+  \(a=b\to[\varphi(a)\leftrightarrow \varphi(b)]\).
+\end{theorem}
+\begin{proof}
+  我们对 \(\varphi\) 所拥有的逻辑符号数量 \(n\) 作归纳。当 \(n=0\) 时，\(\varphi\) 只能形如 \(c\in d,c\in a,a\in c,a\in a\) 之一。显然 \(a=b\to[c\in d\leftrightarrow c\in d]\)；从相等的定义知 \(a=b\to[c\in a\leftrightarrow c\in b]\)；由引理知 \(a=b\to[a\in c\leftrightarrow b\in c]\)。从等式的定义以及引理我们分别知道
+  \begin{equation*}
+    a=b\to[a\in a\leftrightarrow a\in b],\qquad 
+    a=b\to[a\in b\leftrightarrow b\in b],
+  \end{equation*}
+  于是有 \(a=b\to[a\in a\leftrightarrow b\in b]\)。
+
+  对于 \(n>0\) 的情况，我们可以利用
+  \begin{equation*}
+    \vdashLA \psi\lor\eta\leftrightarrow \lnot[\lnot\psi\land\lnot\eta],\qquad
+    \vdashLA (\exists x)\psi(a,x)\leftrightarrow \lnot(\forall x)[\lnot\psi(a,x)]
+  \end{equation*}
+  将其变为逻辑符号仅含 \(\lnot,\lor,\forall\) 的公式。于是，根据归纳假设，拥有 \(n\) 个逻辑符号的 \(\varphi(a)\) 总形如
+  \begin{equation*}
+    \text{(a) }\lnot\psi(a),\qquad
+    \text{(b) }\psi(a)\land\eta(a),\qquad 
+    \text{(c) }(\forall x)\psi(a,x)
+  \end{equation*}
+  之一。
+
+  对于 (a),(b) 两种情况，由于 \(\psi(a),\eta(a)\) 的逻辑符号个数小于 \(n\)，故根据归纳假设我们有
+  \begin{equation*}
+    a=b\rightarrow [\psi(a)\leftrightarrow\psi(b)],\qquad
+    a=b\rightarrow [\eta(a)\leftrightarrow\eta(b)],
+  \end{equation*}
+  于是根据 \(\lnot,\land\) 的性质有
+  \begin{equation*}
+    a=b\rightarrow [\lnot\psi(a)\leftrightarrow\lnot\psi(b)],\qquad
+    a=b\rightarrow [\psi(a)\land\eta(a)\leftrightarrow\psi(b)\land\eta(b)].
+  \end{equation*}
+
+  接下来考虑 (c) 的情况。若 \(\varphi(a)\) 形如 \((\forall x)\psi(a,x)\)，则我们取一个自由变量 \(c\) 既不在 \(\psi(a,x)\) 内出现过，也不为 \(a,b\)。那么，根据归纳假设，我们有
+  \begin{equation*}
+    a=b\rightarrow [\psi(a,c)\leftrightarrow\psi(b,c)].
+  \end{equation*}
+
+  接下来运用逻辑公理 \ref{axiom:逻辑公理}d，有
+  \begin{equation*}
+    (\forall x)[\psi(a,x)\leftrightarrow \psi(b,x)]\to
+    [(\forall x)\psi(a,x)\leftrightarrow (\forall x)\psi(b,x)],
+  \end{equation*}
+  于是我们有
+  \begin{equation*}
+    a=b\to[(\forall x)\psi(a,x)\leftrightarrow (\forall x)\psi(b,x)].\qedhere
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  外延性保证一个集合仅由其组成元素确定。如果将 \(=\) 引入基本逻辑符号，有些读者可能会认为外延公理可以被舍弃。然而，Scott 在 \cite[pp. 115--131]{scott62} 中证明，舍弃外延公理必然会导致弱化整个逻辑系统。于是，就算 \(=\) 被引入进基本逻辑符号，外延公理仍然是必要的，参见 \cite{quine69}。
+\end{remark}

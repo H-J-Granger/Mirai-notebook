@@ -1,0 +1,89 @@
+% !TEX program = xelatex
+\documentclass[a4paper,zihao=5]{ctexbook}
+\input{../lib/begin.tex}
+
+\makeindex[columns=2,program=texindy,options=-s myindex_style.ist]
+
+\begin{document}
+
+\pagenumbering{roman}
+
+\title{未来笔记\\第一卷：数学分析}
+\author{栗山~未来}
+\date{\zhtoday} 
+\maketitle 
+
+\include{0-前言/前言.tex}
+
+\tableofcontents
+
+\pagenumbering{arabic}
+
+\include{1-公理化集合论/公理化集合论.tex}
+
+\printindex
+
+\bibliography{bibliography}
+
+\end{document} 
+
+
+\iffalse
+ 
+大纲：
+
+  公理化集合论
+    Schroeder-Bernstein 定理 (Y1,hw1b)
+  实数理论
+  连续性和收敛性
+    Riemann 重排 (Y1,hw2c)
+    Cesaro 求和 (Y1,hw2d)
+    **Banach-Mazur 游戏 (Y1,hw2)
+  单变量函数微分学
+  单变量函数积分学
+  常微分方程初步
+  多变量函数的微分学
+  测度论初步*                 (Y2,R2)
+  多变量函数的重积分
+  曲线积分和曲面积分
+  场论初步                    (C2,X2)
+  R 上的 Fourier 分析         (R1)
+  有限 Fourier 分析及其应用*   (R1)
+  R^n 上的分布*               (Y3)
+  R^n 上的 Fourier 分析*      (Y3)
+  R^n 上的 Sobolev 空间*      (Y3)
+
+附录：
+  与 B(,A) 系列教学大纲的对照
+  一些不等式
+  线性代数
+  初等数论
+  空间解析几何
+  分数阶微积分初步* (I. Podlubny, 袁晓：《分数阶微积分》，尤其是 2.2)
+
+标注：
+  (Yn): 于品《数学分析讲义》第 n 卷
+  (Rn)：Rudin 分析系列第 n 卷
+  (Xn)：谢慧民《数学分析习题课讲义》第 n 卷
+  (Cn)：常庚哲《数学分析教程》第 n 卷
+  其他默认为程艺《数学分析讲义》中内容。
+  为方便科大读者使用，用 * 的内容标出了科大 A,B 系列数分课程中不需要掌握的部分。
+  
+逻辑上应当允许与其他笔记的交叉引用，但只允许：
+
+MA      LA
+1       1
+2---\   2
+3   |   3
+4<\ \-->4
+5 \-----5
+6       6
+7       7
+.       .
+.       .
+.       .
+
+即，不能存在 (m1,m2,l1,l2) 使得 m1<m2,l1<l2，且 MA 的 m1 章依赖 LA 的 l2 章、且 LA 的 l1 章依赖 LA 的 m2 章。
+
+TeX 技术细节可见 https://tex.stackexchange.com/a/14365. 
+\fi
