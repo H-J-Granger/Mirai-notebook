@@ -1,9 +1,9 @@
 name: build-pdf
 on:
   pull_request:
-    branches: []
+    branches: [CI-test]
   push:
-    branches: []
+    branches: [CI-test]
   
 jobs:
   build_latex:
