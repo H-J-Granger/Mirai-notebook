@@ -1,0 +1,24 @@
+\begin{thebibliography}{1}
+
+\bibitem{knuth86}
+D.E. Knuth.
+\newblock {\em The TeXbook}.
+\newblock Addison--Wesley, 1986.
+
+\bibitem{quine69}
+Willard~Van~Orman Quine.
+\newblock {\em Set Theory and Its Logic}.
+\newblock Harvard paperback. Harvard University Press, 1969.
+
+\bibitem{scott62}
+Dana Scott.
+\newblock {\em Essays on the Foundations of Mathematics}.
+\newblock North-Holland Publishing Company, Amsterdam, 1962.
+
+\bibitem{takeuti12}
+Gaisi Takeuti and Wilson~M. Zaring.
+\newblock {\em Introduction to Axiomatic Set Theory}, volume 001 of {\em
+  Graduate Texts in Mathematics}.
+\newblock Springer, 2012.
+
+\end{thebibliography}

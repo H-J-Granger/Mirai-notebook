@@ -5,16 +5,16 @@
 *.pdf
 
 # Latex stuffs
-*.aux
-*.bbl
-*.blg
-*.fdb_latexmk
-*.fls
-*.idx
-*.ind
-*.ilg
-*.log
-*.out
-*.synctex.gz
-*.toc
-*.xdv
+# *.aux
+# *.bbl
+# *.blg
+# *.fdb_latexmk
+# *.fls
+# *.idx
+# *.ind
+# *.ilg
+# *.log
+# *.out
+# *.synctex.gz
+# *.toc
+# *.xdv

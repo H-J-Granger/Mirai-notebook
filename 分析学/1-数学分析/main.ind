@@ -1,0 +1,57 @@
+\begin{theindex}
+  \providecommand*\lettergroupDefault[1]{}
+  \providecommand*\lettergroup[1]{%
+      \par\textbf{#1}\par
+      \nopagebreak
+  }
+
+  \lettergroup{B}
+  \item 变量
+    \subitem 元\~{}, \hyperpage{3}
+    \subitem 约束\~{}, \hyperpage{3}
+    \subitem 自由\~{}, \hyperpage{3}
+  \item Bourbaki 危险区符号, \hyperpage{iii}
+
+  \indexspace
+
+  \lettergroup{D}
+  \item 定理, \hyperpage{4}
+
+  \indexspace
+
+  \lettergroup{F}
+  \item Fermat 大定理, \hyperpage{iii}
+  \item 符号
+    \subitem 辅助\~{}, \hyperpage{3}
+    \subitem 逻辑\~{}, \hyperpage{3}
+    \subitem 谓词\~{}, \hyperpage{3}
+
+  \indexspace
+
+  \lettergroup{G}
+  \item 公理
+    \subitem 逻辑\~{}, \hyperpage{3}
+
+  \indexspace
+
+  \lettergroup{L}
+  \item 良构公式, \hyperpage{3}
+    \subitem 原子的\~{}, \hyperpage{3}
+
+  \indexspace
+
+  \lettergroup{T}
+  \item 推导符号, \hyperpage{4}
+  \item 推理规则, \hyperpage{4}
+
+  \indexspace
+
+  \lettergroup{X}
+  \item 相等, \hyperpage{4}
+
+  \indexspace
+
+  \lettergroup{Y}
+  \item 元语句, \hyperpage{4}
+
+\end{theindex}
