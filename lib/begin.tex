@@ -1,0 +1,45 @@
+% 这里最好放 \begin{document} 以前的内容。
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{titlesec,booktabs,tikz}
+\usepackage[a4paper,margin=1in]{geometry}
+
+\usepackage{chngcntr}
+\numberwithin{equation}{section}
+
+\usepackage[acronym]{glossaries}
+
+\usepackage[texindy]{imakeidx}  % 索引表
+% myindex_style.ist 是用作给索引提供字母索引的。
+% 下面是一些例子。
+% 有个 bug：怀疑第一次使用字母索引需要一个纯 ASCII 单词（如 \index{PDE}）来启动。
+
+\iffalse
+% 汉字开头的内容要手动提供拼音来索引。
+% 尽管 texindy 理论上支持 -C chinese -L pinyin 来自动生成拼音索引，但是实际上无用。
+% 汉字索引统一使用拼音。和制汉字优先使用新华社提供的拼音。
+
+\index{lishan@栗山}  % @前面的是用作索引的字符
+\index{lishan@栗山!weilai@未来}  % !是用作缩进。
+\index{lishan@栗山!meixing@美幸}
+\index{shenyuanqiuren@神原秋人}
+\index{woheni@我和你}
+
+% 理论上应该写 Lagrangezhongzhidingli 之类的，但是开头的 Lagrange 已经足够索引了。
+  \index{Lagrange 中值定理}  
+% 行内公式几乎必须要用手动索引。
+  \index{sigmadaishu@\(\sigma\)-代数} 
+% 注音字母不需要索引的（不过场景很少）
+  \index{\'Sniatycki 定理}
+\fi
+
+\bibliographystyle{plain}
+
+
+% 不能放在前面，不然 Index 就没有链接了。
+\usepackage[hidelinks]{hyperref}
+
+
+% TODO: 符号表（可以用 glossary）
+
+\input{}
