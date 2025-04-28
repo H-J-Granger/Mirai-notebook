@@ -13,6 +13,7 @@ Mirai's notebook, mainly in math, physics, and theoretical computer science.
 cd <想要编译的文件所在目录，譬如 分析学/1-数学分析>
 latexmk -synctex=1 -interaction=nonstopmode -file-line-error -xelatex -outdir=. main.tex
 bibtex main
+makeindex main.nlo -s <PATH to [root]/lib/nomencl.ist> -o main.nls
 latexmk -synctex=1 -interaction=nonstopmode -file-line-error -xelatex -outdir=. main.tex
 latexmk -synctex=1 -interaction=nonstopmode -file-line-error -xelatex -outdir=. main.tex
 ```
