@@ -18,3 +18,5 @@
 *.synctex.gz
 *.toc
 *.xdv
+*.nlo
+*.nls

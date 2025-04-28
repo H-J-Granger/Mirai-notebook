@@ -1,0 +1,25 @@
+% !TEX root = ../main.tex
+\section{命题演算}
+
+王新茂老师有云：“学数学就是学说话”。数学的证明，通常使用的是可以化为逻辑语言的自然语言。接下来我们开始考察一种最基础的逻辑语言：命题演算。
+
+本节主要参考自 \cite[2.1]{wang18}。
+
+我们可以视命题演算为一种形式语言。
+
+\index{mingtiyansuanxingshixitong@命题演算形式系统}
+\index{mingtibianyuan@命题变元}
+\index{mingtilianjieci@命题连接词}
+\begin{definition}[命题演算形式系统] \label{def:命题演算形式系统}
+  \textbf{命题演算形式系统} 是一种语言，有如下字母表：
+  \begin{enumerate}
+    \item \(x,y,z,x_1,y_1,z_1,\cds\) 作为 \textbf{命题变元}；
+    \item \(\lnot,\land,\lor,\Rightarrow,\Leftrightarrow\) 作为 \textbf{命题连接词}；
+    \item 辅助记号 \((\) 和 \()\) 用作确定符号结合的顺序，
+  \end{enumerate}
+  同时，我们使用如下的规则构成公式：
+  \begin{enumerate}
+    \item 每个命题变元都是一个公式，称为 \textbf{简单公式}；
+    \item 若 \(p,q\) 是公式，则 \(\lnot p,(p\land q),(p\lor q),(p\Rightarrow q),(p\Leftrightarrow q)\) 都是公式。
+  \end{enumerate}
+\end{definition}

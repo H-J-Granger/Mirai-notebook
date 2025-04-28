@@ -54,7 +54,19 @@
       "name": "makeindex",
       "command": "makeindex",
       "args": [
-        "-s %WORKSPACE_FOLDER%/lib/myindex_style.ist"
+        "-s",
+        "%WORKSPACE_FOLDER%/lib/nomencl.ist",
+      ]
+    },
+    {
+      "name": "makeindex (nomencl)",
+      "command": "makeindex",
+      "args": [
+        "main.nlo",
+        "-s",
+        "%WORKSPACE_FOLDER%/lib/nomencl.ist",
+        "-o",
+        "main.nls"
       ]
     },
     {
@@ -210,11 +222,11 @@
       ]
     },
     {
-      "name": "xelatex -> bibtex -> xelatex * 2",
+      "name": "xelatex -> makeindex -> bibtex -> xelatex * 2",
       "tools": [
         "xelatexmk",
         "bibtex",
-        // "makeindex",
+        "makeindex (nomencl)",
         // "upmendex",
         "xelatexmk",
         "xelatexmk",
@@ -225,6 +237,7 @@
       "tools": [
         "pdflatex",
         "bibtex",
+        "makeindex",
         "pdflatex",
         "pdflatex"
       ]
@@ -232,7 +245,8 @@
   ],
   "todo-tree.tree.scanMode": "open files",
   "editor.tabSize": 2,
-  "editor.acceptSuggestionOnCommitCharacter": true
+  "editor.acceptSuggestionOnCommitCharacter": true,
+  // "inlineChat.lineNaturalLanguageHint": false
   // "latex-workshop.latex.watch.pdf.delay": 3000,
   // "latex-workshop.latex.watch.delay": 3000,
 }
